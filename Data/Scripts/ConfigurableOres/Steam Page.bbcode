@@ -1,0 +1,69 @@
+[h1]Need help? Find a bug? Want to talk to other users?
+[b]Join the discussion on Discord:[/b] https://discord.gg/2va5F9Cp[/h1]
+
+[hr][/hr][h1]What does this do?[/h1]
+This mod gives players and admins the power to add, remove, and modify ores present on each planet. It supports vanilla [i]and[/i] modded planets and ores. It uses a tunable algorithm to determine how much or little of an ore spawns on a planet, as well as the depth at which it spawns and the size of the deposits. It achieves Vanilla-like mining experiences out-of-the-box and can quickly create a unique experience for your game world with a few short chat commands.
+
+Ore settings can be configured at three levels: World, Planet, and Ore. 
+
+[b]This mod can be used in place of:[/b]
+[list]
+[*]Deeper ores mods
+[*]Scarce/more/balanced resources mods
+[*]Compatibility "patches" between mods that add planet ores
+[*]One-off planet re-uploads which can be an intellectual property grey area with modders.
+[/list]
+[b]What it does not do:[/b]
+[list]
+[*]Change [i]the shapes, geographical locations, and clustering[/i] of ore deposits. For that you must combine this mod with planet mod(s), such as [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1649218738]Procedurally Generated Ore[/url].
+[/list]
+
+[hr][/hr][h1]Who is this for?[/h1]
+[list]
+[*][b]Players[/b] using mods like Deeper Ores or (Re)Balanced, More, or Scarce Resources
+[*][b]Players[/b] using several mods that add ores to the game
+[*][b]Players[/b] who want to add, remove, or change ores on planet(s)
+[*][b]Admins[/b] who want to fine-tune planetary resources
+[*]Planet [b]modders[/b] who get requests for custom planet OreMappings and want an alternative
+[*]Production [b]modders[/b] who get requests for compatibility with other mods and want an easy fix
+[/list]
+
+[hr][/hr][h1]How do I use it?[/h1]
+[b]Read the Guide:[/b] [u]writing it is in progress...[/u]
+
+[h3][b]Put this mod [u][i]below[/i][/u] planet and production mods in the load order.[/b][/h3]
+
+All of the Quickstart Example commands are compatible with each other. [b]The order they are given matters.[/b] Changes to ore depth and size settings are made at three levels:
+[list]
+[*]World
+[*]Planet
+[*]Individual ores assigned to a planet
+[/list]
+Changes to the World level also change the same settings at the Planet and Ore levels. Changes at the Planet level also change the Ore level. It is recommended to make all your World level changes first, then Planet level, and finally Ore level. If you make changes in this order, you will not lose customizations unless you use the "reset" command in a settings menu.
+
+[hr][/hr][h1]Notes, Warnings, and Known Issues[/h1]
+[list]
+[*]This mod has mild compatibility issues with planets which have a decorative custom VoxelMaterial with a MinedOre value matching an actual mineable ore. Mars and Cascadia are example of this phenomenon: Mars with "Ice" and Cascadia with "CobaltCrystal". This mod has a work-around: It keeps a manually-updated list of static VoxelMateirals which should not be touched. However, it cannot know about all the static VoxelMaterials for every planet. [b]I welcome planet modders to send me lists of their mineable VoxelMaterials which should be considered static.[/b]A future update to this mod will let the user edit the static VoxelMaterials list.
+
+[*]This mod [i]will[/i] work with mods that dramatically reduce ore slots on planets, such as Industrial Overhaul, HOWEVER its capabilities will be severely limited. This is because IO reduces ore slots from the normal value of around 50 down to about 10. If you want to use other mod ores with IO, it is recommended to load this mod BEFORE Industrial Overhaul and then selectively add IO's ores to your planets.
+
+[*]It is compatible with MP and DS. [b]Build your world offline in single-player, then upload it to your DS.[/b]
+[/list]
+
+[hr][/hr][h1]Contributions & Acknowledgements[/h1]
+The Space Engineers modding community is outstanding. I learned C# so I could write my first script mod and (almost) everyone I interacted with was supremely helpful. Thank you.
+
+[b]Early Adopters and Testers:[/b]
+[list]
+[*]StrikeWyrm
+[*]TechCoder
+[*]TheFinalEvent97
+[*]Katarina
+[/list]
+[b]Shout-Outs:[/b]
+[list]
+[*]PatrickQ - Programming help, general support, and a providing a channel on his [url=https://discord.gg/PFkntJYQ]Discord server[/url]
+[*]Digi, Kreeg, DrDoboz, ParadoxReborn, gruzzob, and the [url=https://discord.gg/FfSdMtdP]KSH Discord #modding-programming community[/url]
+[*]Echo, FaintSpeaker, Cycle_Of_Insanity, and the [url=https://discord.gg/ntPMj7Zs]Space Engineers Planet Modding Community[/url]
+[*]enenra's [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2715847084]AQD - Deeper Ores[/url] is the inspiration for this mod.
+[/list]

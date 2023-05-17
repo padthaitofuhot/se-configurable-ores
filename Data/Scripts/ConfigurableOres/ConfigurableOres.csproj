@@ -1,0 +1,83 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>6</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+            <HintPath>..\..\..\..\..\..\..\.steam\debian-installation\steamapps\common\SpaceEngineers\Bin64\netstandard.dll</HintPath>
+        </Reference>
+        <Reference Include="ProtoBuf.Net.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>..\..\..\..\..\..\..\.steam\debian-installation\steamapps\common\SpaceEngineers\Bin64\ProtoBuf.Net.Core.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="Sandbox.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>..\..\..\..\..\..\..\.steam\debian-installation\steamapps\common\SpaceEngineers\Bin64\Sandbox.Common.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="Sandbox.Game, Version=0.1.1.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>..\..\..\..\..\..\..\.steam\debian-installation\steamapps\common\SpaceEngineers\Bin64\Sandbox.Game.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="Sandbox.Graphics, Version=0.1.1.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>..\..\..\..\..\..\..\.steam\debian-installation\steamapps\common\SpaceEngineers\Bin64\Sandbox.Graphics.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="SpaceEngineers.Game, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>..\..\..\..\..\..\..\.steam\debian-installation\steamapps\common\SpaceEngineers\Bin64\SpaceEngineers.Game.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="SpaceEngineers.ObjectBuilders, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>..\..\..\..\..\..\..\.steam\debian-installation\steamapps\common\SpaceEngineers\Bin64\SpaceEngineers.ObjectBuilders.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+            <HintPath>..\..\..\..\..\..\..\.steam\debian-installation\steamapps\common\SpaceEngineers\Bin64\System.Collections.Immutable.dll</HintPath>
+        </Reference>
+        <Reference Include="VRage, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>..\..\..\..\..\..\..\.steam\debian-installation\steamapps\common\SpaceEngineers\Bin64\VRage.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="VRage.Game, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>..\..\..\..\..\..\..\.steam\debian-installation\steamapps\common\SpaceEngineers\Bin64\VRage.Game.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="VRage.Input, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>..\..\..\..\..\..\..\.steam\debian-installation\steamapps\common\SpaceEngineers\Bin64\VRage.Input.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="VRage.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>..\..\..\..\..\..\..\.steam\debian-installation\steamapps\common\SpaceEngineers\Bin64\VRage.Library.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="VRage.Math, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>..\..\..\..\..\..\..\.steam\debian-installation\steamapps\common\SpaceEngineers\Bin64\VRage.Math.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="VRage.Render, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>..\..\..\..\..\..\..\.steam\debian-installation\steamapps\common\SpaceEngineers\Bin64\VRage.Render.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="VRage.Render11, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>..\..\..\..\..\..\..\.steam\debian-installation\steamapps\common\SpaceEngineers\Bin64\VRage.Render11.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="obj\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="obj\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="obj\**" />
+    </ItemGroup>
+
+</Project>

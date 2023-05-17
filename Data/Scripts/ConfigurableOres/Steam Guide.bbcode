@@ -1,0 +1,118 @@
+[hr][/hr]
+[h1]How to Interact with the Mod[/h1]
+This mod's chat UI is organized like a tree. It has a trunk, branches, and leaves.
+"/ore" is the trunk of the tree. You're already there whenever you type /ore.
+When you typed "/ore Help", you went from the trunk "/ore" to a branch named "Help". Whenever you go to a branch, you will see hints about any other branches you can get to from there. Most branches have a "Help" branch so you can get more help.
+Some branches have leaves. A leaf can be edited. A leaf always needs a value.A hint for the value is shown in angle brackets, <Like This>. For example, to add an ore to planet Mars, you'd type "/ore mars add <Ore>" and replace <Ore> with the name of a real ore: uranium, iron, whatever ore you want!
+All commands are case-insensitive, meaning you can MiX CaPitAL anD LOwerCasE and it will work fine. The only exception to case-insensitivity is when specifying Large or Small ore detector sizes.
+Try typing "/ore Planets" to get a list of planets you can use when you see <Planet>.
+
+[hr][/hr]
+[h1]Root Commands[/h1]
+World: Edit world-level settings
+Planets: Show list of known planets
+Ores: Show list of known ores
+<Planet>: Edit the planet named <Planet>
+
+[hr][/hr]
+[h1]World Settings[/h1]
+These settings alter the entire world.
+
+WARNING: Settings are propagated from World level to Planet level to Ore level. If you make changes made at this level, it will also change the same settings for everything connected, in the order: World -> Planet -> Ore. For example, setting a minimum depth at the world level will set the same depth for all planets and all ores assigned to those planets. It is best to make changes at the world level before making more detailed changes on planets and assigned ores.
+
+Mod: These settings modify core mod behaviors, such as logging
+Depth: Edit the depth at which deposits spawn
+Size: Edit deposit sizes
+
+[hr][/hr]
+[h1]Mod Settings[/h1]
+
+
+
+[hr][/hr]
+[h1][/h1]
+
+[hr][/hr]
+[h1][/h1]
+
+[hr][/hr]
+[h1][/h1]
+
+[hr][/hr]
+[h1]Planet Settings[/h1]
+Each planet has its own settings and ore assignments. This menu is where you edit those settings.
+
+Add: Adds the given <Ore> to the planet. <Ore> is always the name of any ore (for example, "uranium"). <Ore> will be added with the planet's mean Rarity value unless Rarity is provided with the Add command.
+Del: Removes the given <Ore> from the planet.
+<Ore>: Allows editing individual ore settings.
+Depth: Edit the depth at which deposits spawn
+Size: Allows editing deposit sizes
+
+[hr][/hr]
+[h1]Depth & Depth Automation[/h1]
+These settings alter the behavior of the Depth algorithm. The defaults provide a "Vanilla feel" and are recommended for new users of the mod. Please refer to the guide before changing Advanced settings.
+
+Min: This sets the minimum depth at which an ore deposit can spawn. Any value less than 2 can cause ores to be spawned at the planet surface.
+Max: This sets the maximum depth. Ores cannot spawn deeper than this.
+UseProgressive: When enabled, the Depth system puts ore deposits progressively deeper each time they show up in a planet's ore mapping table (see guide). For example, if Iron appears 8 times in a planet ore mapping table, some Iron deposits will be particularly deep. This emulates "Vanilla" deposit depths and is enabled by default.
+UseDetector: When enabled, the Depth system sets the Max depth equal to the maximum range of ore detectors during depth calculations. Enabled by default.
+Curve: Sets the shape of the Depth curve. This provides more nuance to deposit depths. Smaller values cause ores to spawn deeper; larger values cause ores to spawn shallower.
+Fuzz: Sets the variance or "fuzziness" of calculated ore deposit depths. Ore deposit depths are calculated and then increased or decreased slightly based on this value.  Depths will not exceed Min or Max.
+DetectorSize: Must be set to either Large or Small. This is the grid size of the ore detector whose max range will be used when UseDetector is enabled. In the Vanilla game, Large Ore Detector has the longest range. If you use modded ore detectors or want an easier game, you could set this to Small.
+DetectorFactor: Adjusts the relative depth of ore deposits from the range of the configured ore detector block size. The default is to use 100% (1.0) of the detector range. Setting this lower (< 1.0) will cause ores to spawn more shallow; whereas setting it higher (> 1.0) will cause ores to spawn deeper.
+
+[hr][/hr]
+[h1]Size & Size Automation[/h1]
+These settings alter the behavior of the Size algorithm. The defaults provide a "Vanilla feel" and are recommended for new users of the mod. Please refer to the guide before changing Advanced settings.
+
+Min: Sets the minimum vertical size of an ore deposit.
+Max: Sets the maximum vertical size of an ore deposit.
+Fuzz: Sets the variance or "fuzziness" of a calculated ore deposit size. Ore deposit sizes are calculated and then increased or decreased based on a random number within this value.  Sizes will not exceed the Min or Max values.
+Factor: Sets the percentage of the deposit depth to determine the deposit size.
+
+[hr][/hr]
+[h1]Editing the Config File[/h1]
+[b]DANGER:[/b] Really don't change the config file unless you absolutely 100% need to do it. Keep in mind that a single mistake editing the config file may cause a persistent crash-to-desktop (CTD) and mod load failure until the mistake is fixed or the config file is deleted ([i]and all your changes are lost[/i]). This mod has to track a lot of data. With just vanilla planets and ores loaded the config file is about 200kB. That's a lot of space for accidents to happen. So, just stay out of the config file unless you absolutely need to do it.
+
+Crucial settings for the mod itself and World-level settings, such as the DisableChatCommands flag and list of Static VoxelMaterials, are located at the top of the config file for easy access:
+[code]
+<Logging>false</Logging>
+<CommandPrefix>/ore</CommandPrefix>
+<DisableChatCommands>false</DisableChatCommands>
+<Depth>
+    <Min>2</Min>
+    <Max>150</Max>
+    <UseProgressive>true</UseProgressive>
+    <UseDetector>true</UseDetector>
+    <Curve>0.8</Curve>
+    <Fuzz>0.75</Fuzz>
+    <DetectorSize>Large</DetectorSize>
+    <DetectorFactor>1</DetectorFactor>
+</Depth>
+<Size>
+    <Min>1</Min>
+    <Max>24</Max>
+    <Factor>0.15</Factor>
+    <Fuzz>0.5</Fuzz>
+</Size>
+<StaticVoxelMaterials>
+    <string>Ice</string>
+    <string>CobaltCrystal</string>
+</StaticVoxelMaterials>
+<IgnoredPlanets>
+    <string>tutorial</string>
+    <string>test</string>
+    <string>example</string>
+</IgnoredPlanets>
+[/code]
+
+[hr][/hr]
+[h1]Compatible Mods[/h1]
+[list]
+[*]Tiered Thorium Reactors
+[/list]
+
+[h1]Mods with Issues[/h1]
+[list]
+[*]Life'Tech Powers - Breaks the save file, not sure why.
+[/list]
