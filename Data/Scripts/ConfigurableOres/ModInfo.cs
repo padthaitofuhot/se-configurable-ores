@@ -37,7 +37,6 @@ namespace ConfigurableOres
         /// Build: build - no CI/CD, not used.
         /// </summary>
         private const int RELEASE_NUMBER = 1;
-
         private const int MAJOR_VERSION = 0;
         private const int MINOR_VERSION = 12;
         private const int BUILD_NUMBER = 0;
