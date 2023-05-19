@@ -2302,7 +2302,7 @@ namespace ConfigurableOres
 
         private static string BreadCrumb(string crumbs = "", string newCrumb = "")
         {
-            Log("In BreadCrumb()");
+            Log($"In BreadCrumb({crumbs})");
             return crumbs.Length > 0 ? $"{crumbs} {newCrumb}" : newCrumb;
         }
 
