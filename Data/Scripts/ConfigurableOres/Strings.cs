@@ -242,30 +242,30 @@ namespace ConfigurableOres
             AddMenu("depth", "Depth", "Ore deposit depth settings menu");
             AddItem("depth_summary", Item("depth"));
             AddHelp("depth_summary", "Edit the depth at which deposits spawn");
-            AddMenu("depth_min", "Min <Meters>", "Set minimum depth");
+            AddMenu("depth_min", "Min", "<Meters>: Set minimum depth");
             AddHelp("depth_min",
                 $"Sets the minimum depth at which an ore deposit can spawn. Any value less than 2 can cause ores to be spawned at the planet surface.");
-            AddMenu("depth_max", "Max <Meters>", "Set maximum depth");
+            AddMenu("depth_max", "Max", "<Meters>: Set maximum depth");
             AddHelp("depth_max", $"Sets the maximum depth. Ores cannot spawn deeper than this.");
-            AddMenu("depth_use_progressive", "UseProgressive <On/Off>", "Scale depth of an ore's successive ore slots?");
+            AddMenu("depth_use_progressive", "UseProgressive", "<On/Off>: Scale depth of an ore's successive ore slots?");
             AddHelp("depth_use_progressive",
                 $"When enabled, the {Item("depth")} system puts ore deposits progressively deeper each time they show up in a planet's ore mapping table (see guide). For example, if Iron appears 8 times in a planet ore mapping table, some Iron deposits will be particularly deep. This emulates \"Vanilla\" deposit depths and is enabled by default.");
-            AddMenu("depth_use_detector", "UseDetector <On/Off>",
-                $"Configure {Item("depth_max")} depth from ore detector ranges?");
+            AddMenu("depth_use_detector", "UseDetector",
+                $"<On/Off>: Configure {Item("depth_max")} depth from ore detector ranges?");
             AddHelp("depth_use_detector",
                 $"When enabled, the {Item("depth")} system sets the {Item("depth_max")} depth equal to the maximum range of ore detectors during depth calculations. Enabled by default.");
-            AddMenu("depth_curve", "Curve <Float>", "Set the depth curve factor");
+            AddMenu("depth_curve", "Curve", "<Float>: Set the depth curve factor");
             AddHelp("depth_curve",
                 $"Sets the shape of the {Item("depth")} curve. This provides more nuance to deposit depths. Smaller values cause ores to spawn deeper; larger values cause ores to spawn shallower.");
-            AddMenu("depth_fuzz", "Fuzz <Float>", "Set depth fuzz factor");
+            AddMenu("depth_fuzz", "Fuzz", "<Float>: Set depth fuzz factor");
             AddHelp("depth_fuzz",
                 $"Sets the variance or \"fuzziness\" of calculated ore deposit depths. Ore deposit depths are calculated and then increased or decreased slightly based on this value.  Depths will not exceed {Item("depth_min")} or {Item("depth_max")}.");
-            AddMenu("depth_detector_size", "DetectorSize <Block Size>",
-                $"\"Large\" or \"Small\"");
+            AddMenu("depth_detector_size", "DetectorSize",
+                $"<Block Size>: \"Large\" or \"Small\"");
             AddHelp("depth_detector_size",
                 $"Must be set to either Large or Small. This is the grid size of the ore detector whose max range will be used when {Item("depth_use_detector")} is enabled. In the Vanilla game, Large Ore Detector has the longest range. If you use modded ore detectors or want an easier game, you could set this to Small.");
-            AddMenu("depth_detector_factor", "DetectorFactor <Float>",
-                "% of detector range for auto depth");
+            AddMenu("depth_detector_factor", "DetectorFactor",
+                "<Float>: % of detector range for auto depth");
             AddHelp("depth_detector_factor",
                 $"Adjusts the relative depth of ore deposits from the range of the configured ore detector block size. The default is to use 100% (1.0) of the detector range. Setting this lower (< 1.0) will cause ores to spawn more shallow; whereas setting it higher (> 1.0) will cause ores to spawn deeper.");
             AddHelp("depth",
@@ -312,14 +312,14 @@ namespace ConfigurableOres
             AddMenu("size", "Size", "Ore deposit size settings menu");
             AddItem("size_summary", Item("size"));
             AddHelp("size_summary", "Edit deposit sizes");
-            AddMenu("size_min", "Min <Meters>", "Set minimum deposit size");
+            AddMenu("size_min", "Min", "<Meters>: Set minimum deposit size");
             AddHelp("size_min", $"Sets the minimum vertical size of an ore deposit.");
-            AddMenu("size_max", "Max <Meters>", "Set maximum deposit size");
+            AddMenu("size_max", "Max", "<Meters>: Set maximum deposit size");
             AddHelp("size_max", $"Sets the maximum vertical size of an ore deposit.");
-            AddMenu("size_fuzz", "Fuzz <Float>", "Set deposit size fuzz factor");
+            AddMenu("size_fuzz", "Fuzz", "<Float>: Set deposit size fuzz factor");
             AddHelp("size_fuzz",
                 $"Sets the variance or \"fuzziness\" of a calculated ore deposit size. Ore deposit sizes are calculated and then increased or decreased based on a random number within this value.  Sizes will not exceed the {Item("size_min")} or {Item("size_max")} values.");
-            AddMenu("size_factor", "Factor <Float>", "Set multiple of deposit depth to calculate deposit size");
+            AddMenu("size_factor", "Factor", "Set multiple of deposit depth to calculate deposit size");
             AddHelp("size_factor", $"Sets the percentage of the deposit depth to determine the deposit size.");
             AddHelp("size",
                 $"These settings alter the behavior of the {Item("size")} algorithm. The defaults provide a \"Vanilla feel\" and are recommended for new users of the mod. Please refer to the guide before changing Advanced settings."
