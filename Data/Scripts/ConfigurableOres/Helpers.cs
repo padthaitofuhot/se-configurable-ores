@@ -253,18 +253,6 @@ namespace ConfigurableOres
             return Encoding.UTF8.GetString(base64EncodedBytes);
         }
 
-        public static string SerializeConfig(Configuration configuration)
-        {
-            Log(LOG_SERIALIZE_CONFIGURATION);
-            return MyAPIGateway.Utilities.SerializeToXML(configuration);
-        }
-
-        public static Configuration DeserializeConfig(string configuration)
-        {
-            Log(LOG_DESERIALIZE_CONFIGURATION);
-            return MyAPIGateway.Utilities.SerializeFromXML<Configuration>(configuration);
-        }
-
         #region Menu Helpers
 
         public static bool IsMyMatch(string match, string text)
