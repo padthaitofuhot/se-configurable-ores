@@ -281,10 +281,16 @@ namespace ConfigurableOres
                     .Sum(b => b.BlueValues.Count);
 
                 isValid &= planetConfig.OreSlotCount == totalAO - staticAO;
+                
+                LogVar("memberPlanet.Name", memberPlanet.Name);
+                LogVar("OreSlotCount", planetConfig.OreSlotCount);
+                LogVar("Total ore slots", totalAO);
+                LogVar("Static voxel ore slots", staticAO);
 
                 if (!isValid)
-                    return new MyTuple<bool, string>(isValid,
-                        $"{memberPlanet.Name}: OreSlotCount must be Zero ({planetConfig.OreSlotCount}) or == Total ore slots ({totalAO}) - Static voxel ore slots ({staticAO}).");
+                {
+                    return new MyTuple<bool, string>(isValid, $"{memberPlanet.Name}: OreSlotCount must be Zero ({planetConfig.OreSlotCount}) or == Total ore slots ({totalAO}) - Static voxel ore slots ({staticAO}).");
+                }
 
                 // AssignableOresBlueChannelValues list must == All blue values except Static voxel blue values
                 isValid &= planetConfig.AssignableOresBlueChannelValues.Count ==
