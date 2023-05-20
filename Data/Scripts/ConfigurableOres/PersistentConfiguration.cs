@@ -216,7 +216,7 @@ namespace ConfigurableOres
                 Log(e.Message);
                 Log(e.StackTrace);
 
-                // Leave a big shit in the log and crash if config cannot be loaded.
+                // Leave a big dookie in the log and crash if config cannot be loaded.
                 // todo: spam notification about bad config and disable mod functionality.
                 if (ABEND_ON_FAULT) throw;
             }
@@ -263,30 +263,33 @@ namespace ConfigurableOres
 
             foreach (var memberPlanet in MyPlanetConfigurations.MemberPlanets)
             {
+                Log($"Check config of planet: {memberPlanet.Name}");
+                
+                // Planet Name must not be Null or Whitespace
                 isValid &= !string.IsNullOrWhiteSpace(memberPlanet.Name);
                 if (!isValid)
                     return new MyTuple<bool, string>(isValid,
                         $"{memberPlanet.Name}: !string.IsNullOrWhiteSpace(memberPlanet.Name)");
-
+                
                 var planetConfig = memberPlanet.PlanetConfig;
-
-                Log($"Check config of planet: {memberPlanet.Name}");
-
-                // public int OreSlotCount
+                
                 // OreSlotCount must be Zero or == Total ore slots - Static voxel ore slots
-                if (planetConfig.OreSlotCount == 0) continue;
+                LogVar("OreSlotCount", planetConfig.OreSlotCount);
+                if (planetConfig.OreSlotCount == 0)
+                {
+                    Log("OreSlotCount == 0, skipping further checks");
+                    continue;
+                }
 
                 var totalAO = planetConfig.AssignedOres.Sum(a => a.Count);
+                LogVar("Total ore slots", totalAO);
+                
                 var staticAO = planetConfig.AssignedOres.Where(a => a.HasStaticVoxelMaterial)
                     .Sum(b => b.BlueValues.Count);
+                LogVar("Static voxel ore slots", staticAO);
 
                 isValid &= planetConfig.OreSlotCount == totalAO - staticAO;
                 
-                LogVar("memberPlanet.Name", memberPlanet.Name);
-                LogVar("OreSlotCount", planetConfig.OreSlotCount);
-                LogVar("Total ore slots", totalAO);
-                LogVar("Static voxel ore slots", staticAO);
-
                 if (!isValid)
                 {
                     return new MyTuple<bool, string>(isValid, $"{memberPlanet.Name}: OreSlotCount must be Zero ({planetConfig.OreSlotCount}) or == Total ore slots ({totalAO}) - Static voxel ore slots ({staticAO}).");
@@ -328,8 +331,20 @@ namespace ConfigurableOres
             LogEnd(LOG_CREATE_DEFAULT_CONFIGURATION);
         }
 
-        #endregion
+        public static string SerializeConfig(Configuration configuration)
+        {
+            Log(LOG_SERIALIZE_CONFIGURATION);
+            return MyAPIGateway.Utilities.SerializeToXML(configuration);
+        }
 
+        public static Configuration DeserializeConfig(string configuration)
+        {
+            Log(LOG_DESERIALIZE_CONFIGURATION);
+            return MyAPIGateway.Utilities.SerializeFromXML<Configuration>(configuration);
+        }
+        
+        #endregion
+        
         #region Menu Strings Methods
 
         private static void Error(string topic) => MenuStrings.Error(topic);
