@@ -112,19 +112,20 @@ namespace ConfigurableOres
             // If there are no ore slots (ex. Overvent) then don't continue.
             if (!planetOreMappings.Any()) return;
 
+            // Filter duplicate blue value bytes
+            var cleanPlanetOreMappings = planetOreMappings.GroupBy(pom => pom.Value).Select(v => v.First()).ToList();
+
             // Filter reserved "static" color values from assignables
-            var pomsWithoutStaticVoxels = planetOreMappings
+            var pomsWithoutStaticVoxels = cleanPlanetOreMappings
                 .Where(v => !Session.Config.StaticVoxelMaterials.Contains(v.Type));
 
-            AssignableOresBlueChannelValues
-                .AddRange(pomsWithoutStaticVoxels
-                    .Select(c => c.Value)
+            AssignableOresBlueChannelValues.AddRange(pomsWithoutStaticVoxels.Select(c => c.Value)
                 );
 
             OreSlotCount = AssignableOresBlueChannelValues.Count;
             LogVar("OreSlotCount", OreSlotCount);
 
-            GenerateDefaultAssignments(planetOreMappings.ToList());
+            GenerateDefaultAssignments(cleanPlanetOreMappings.ToList());
 
             // Track the default ores of this planet so we can tell the player.
             foreach (var planetOreAssignment in AssignedOres)
