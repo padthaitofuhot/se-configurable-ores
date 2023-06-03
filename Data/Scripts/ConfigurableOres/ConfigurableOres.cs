@@ -1709,7 +1709,7 @@ namespace ConfigurableOres
 
                 var rarity = planet.MeanRarity;
 
-                // OK if this fails, just means a value for rarity wasn't passed or parsed.
+                // Skip parsing rarity if nothing left to parse
                 if (message.Length > 0)
                 {
                     if (!float.TryParse(message, out rarity))
