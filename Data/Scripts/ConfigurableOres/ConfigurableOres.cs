@@ -2337,7 +2337,7 @@ namespace ConfigurableOres
         {
             /*
              * Filter out static voxel materials so we don't mess with the weird
-             * stuff some Planets do with the oremappings, for example Mars's "Ice" voxelmaterial
+             * stuff some Planets do with the oremappings, for example Mars's "Ice" VoxelMaterial
              */
 
             var tmpList = new List<string>();
