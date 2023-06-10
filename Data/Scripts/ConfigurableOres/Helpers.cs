@@ -42,10 +42,16 @@ namespace ConfigurableOres
         //  TODO [DEBUG] -- Set to false before publishing
         public const string CONFIG_FILE_NAME = "ConfigurableOres.xml";
 
-        // TODO: set to false on release.
+        // ------------------------------
+        // TODO: Set these to false on release.
+        // ------------------------------
+        // Whether or not to throw() up on errors
         public const bool ABEND_ON_FAULT = true;
-        public static bool LOGGING_ENABLED = false;
-        public static bool DEFAULT_LOGGING_ENABLED = false;
+        // Whether or not logging is enabled immediately
+        public static bool LOGGING_ENABLED = true;
+        // Whether or not default new config enables logging
+        public static bool DEFAULT_LOGGING_ENABLED = true;
+        // ------------------------------
         
         public const string COMMAND_PREFIX = "/ore";
         public const string MENU_REGEX_PREFIX = "(?i)^";
