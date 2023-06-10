@@ -273,11 +273,6 @@ namespace ConfigurableOres
             return match.IsMatch(text);
         }
 
-        /*public static string RegexTrim(Regex match, string text)
-        {
-            return RegexTrim(match.ToString(), text);
-        }*/
-
         public static string RegexTrim(string match, string text)
         {
             return Regex.Replace(text, CHAT_REGEX_PREFIX + match, "", RegexOptions.IgnoreCase).Trim();
