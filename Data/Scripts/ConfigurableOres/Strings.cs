@@ -592,8 +592,6 @@ namespace ConfigurableOres
 
         #region ChatUI Menuing
 
-        public const string CHAT_REGEX_PREFIX = "(?i) *^";
-
         public const string CHAT_MENU_PREFIX_HEADER_TOP = ">>>";
         public const string CHAT_MENU_PREFIX_HEADER_COMMANDS = "==";
         public const string CHAT_LINE_THICK = "===========================================";
