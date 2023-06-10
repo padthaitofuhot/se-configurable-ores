@@ -280,7 +280,7 @@ namespace ConfigurableOres
             return match.IsMatch(text);
         }
 
-        public static string RegexTrim(string match, string text)
+        public static string TrimMyMatch(string match, string text)
         {
             return Regex.Replace(text, CHAT_REGEX_PREFIX + match, "", RegexOptions.IgnoreCase).Trim();
         }
