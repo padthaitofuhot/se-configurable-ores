@@ -506,7 +506,7 @@ namespace ConfigurableOres
 
                 menuText.AppendLine(Format(CHAT_MENU_HEADER_TOP, Format(Hint("root_ores"), breadcrumbs)));
 
-                menuText.AppendLine(NiceList(VoxelOres.GetUsableOres(), true));
+                menuText.AppendLine(NiceList(VoxelOres.GetUsableOres()));
 
                 WriteToChat(menuText.ToString());
                 return true;
