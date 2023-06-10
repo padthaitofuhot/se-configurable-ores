@@ -725,7 +725,6 @@ namespace ConfigurableOres
             if (IsMyMatch(Item("reset"), message))
             {
                 var item = Item("reset");
-                Config.CommandPrefix = DEFAULT_COMMAND_PREFIX;
                 Config.Logging = DEFAULT_LOGGING_ENABLED;
                 Save(Config);
                 WriteConfirmationToChat("settings", item, "actions");
