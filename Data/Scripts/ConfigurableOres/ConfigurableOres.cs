@@ -119,7 +119,7 @@ namespace ConfigurableOres
                 if (!Config.DisableChatCommands)
                 {
                     MyAPIGateway.Utilities.MessageEnteredSender += ChatHandler;
-                    WriteToChat(Format(CHAT_HELLO_COMMANDS_ENABLED, Config.CommandPrefix));
+                    WriteToChat(Format(CHAT_HELLO_COMMANDS_ENABLED, COMMAND_PREFIX));
                 }
             }
 
@@ -456,14 +456,10 @@ namespace ConfigurableOres
 
             // Chat fuse burned
             if (Config.DisableChatCommands) return;
+            
+            if (!IsMyMatch(COMMAND_PREFIX, messageText)) return;
 
-            // todo: implement modifying command prefix
-            //var wakeword = DEFAULT_COMMAND_CHAR + Config.CommandPrefix;
-            //LogVar("wakeword", wakeword);
-
-            if (!IsMyMatch(Config.CommandPrefix, messageText)) return;
-
-            if (!MenuRoot(Config.CommandPrefix, RegexTrim(Config.CommandPrefix, messageText)))
+            if (!MenuRoot(COMMAND_PREFIX, TrimMyMatch(COMMAND_PREFIX, messageText)))
                 WriteErrorToChat(Error("default"), messageText);
         }
 
@@ -571,7 +567,7 @@ namespace ConfigurableOres
             // Example command: /ore alien del uranium
             //menuText.Append(NEWLINE);
             //CommandHints.ShuffleList();
-            //menuText.AppendLine(Format(CHAT_MENU_ROOT_HINT_EXAMPLE, Config.CommandPrefix, CommandHints.FirstOrDefault()));
+            //menuText.AppendLine(Format(CHAT_MENU_ROOT_HINT_EXAMPLE, COMMAND_PREFIX, CommandHints.FirstOrDefault()));
 
             WriteToChat(menuText.ToString());
             return true;

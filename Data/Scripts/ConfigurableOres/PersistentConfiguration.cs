@@ -44,7 +44,7 @@ namespace ConfigurableOres
 
         // System
         public bool Logging;
-        public string CommandPrefix;
+        //public string CommandPrefix = "";
         public bool DisableChatCommands;
 
         // OreAutoDepth
@@ -233,7 +233,6 @@ namespace ConfigurableOres
             var isValid = true;
             var reason = "";
 
-            isValid &= !string.IsNullOrWhiteSpace(CommandPrefix);
             if (!isValid) return new MyTuple<bool, string>(isValid, "CommandPrefix IsNullOrWhiteSpace");
 
             isValid &= (Depth.Fuzz > 0);
@@ -315,7 +314,6 @@ namespace ConfigurableOres
             LogBegin(LOG_CREATE_DEFAULT_CONFIGURATION);
 
             DisableChatCommands = false;
-            CommandPrefix = DEFAULT_COMMAND_PREFIX;
 
             // TODO: set this to false before release!!!
             Logging = DEFAULT_LOGGING_ENABLED;
