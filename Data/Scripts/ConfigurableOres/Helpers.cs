@@ -262,6 +262,13 @@ namespace ConfigurableOres
 
         #region Menu Helpers
 
+        public static string MenuRegexBuilder(string match)
+        {
+            var regexString = $"{MENU_REGEX_PREFIX}{Regex.Escape(match)}{MENU_REGEX_SUFFIX}";
+            LogVar("MenuRegexBuilder", "regexString", regexString);
+            return regexString;
+        }
+        
         public static bool IsMyMatch(string match, string text)
         {
             var _regex = new Regex("(?i)^" + match);
