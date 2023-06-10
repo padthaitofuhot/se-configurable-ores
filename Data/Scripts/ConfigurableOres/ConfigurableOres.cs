@@ -1721,11 +1721,16 @@ namespace ConfigurableOres
                     WriteToChat(Format(CHAT_HELP_ORE_ADD_SUCCESS, ore, planetName, rarity));
                     return true;
                 }
+                else
+                {
+                    WriteToChat(CHAT_HELP_ORE_ADD_FAILED);
+                    return false;
+                }
 
                 break;
             }
 
-            WriteToChat(CHAT_HELP_ORE_ADD_FAILED);
+            WriteToChat(CHAT_HELP_ORE_ADD_NOTFOUND);
             return true;
         }
 
