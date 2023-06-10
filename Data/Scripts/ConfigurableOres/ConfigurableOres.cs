@@ -477,7 +477,7 @@ namespace ConfigurableOres
             // World
             if (IsMyMatch(Item("world"), message))
             {
-                return MenuWorld(breadcrumbs, RegexTrim(Item("world"), message));
+                return MenuWorld(breadcrumbs, TrimMyMatch(Item("world"), message));
             }
 
             // List Planets
@@ -523,7 +523,7 @@ namespace ConfigurableOres
                     return false;
                 }
 
-                return MenuPlanet(breadcrumbs, planetName, RegexTrim(planetName, message));
+                return MenuPlanet(breadcrumbs, planetName, TrimMyMatch(planetName, message));
             }
 
             return false;
@@ -622,31 +622,31 @@ namespace ConfigurableOres
             // Mod settings
             if (IsMyMatch(Item("mod"), message))
             {
-                return MenuWorldModSettings(breadcrumbs, RegexTrim(Item("mod"), message));
+                return MenuWorldModSettings(breadcrumbs, TrimMyMatch(Item("mod"), message));
             }
 
             // Depth
             if (IsMyMatch(Item("depth"), message))
             {
-                return MenuAutoDepth(breadcrumbs, RegexTrim(Item("depth"), message));
+                return MenuAutoDepth(breadcrumbs, TrimMyMatch(Item("depth"), message));
             }
 
             // Size
             if (IsMyMatch(Item("size"), message))
             {
-                return MenuAutoSize(breadcrumbs, RegexTrim(Item("size"), message));
+                return MenuAutoSize(breadcrumbs, TrimMyMatch(Item("size"), message));
             }
 
             // Ignored Planets
             if (IsMyMatch(Item("world_ignored_planets"), message))
             {
-                return MenuIgnoredPlanets(breadcrumbs, RegexTrim(Item("world_ignored_planets"), message));
+                return MenuIgnoredPlanets(breadcrumbs, TrimMyMatch(Item("world_ignored_planets"), message));
             }
 
             // Static Voxel Materials
             if (IsMyMatch(Item("world_static_voxel_mats"), message))
             {
-                return MenuStaticVoxelMats(breadcrumbs, RegexTrim(Item("world_static_voxel_mats"), message));
+                return MenuStaticVoxelMats(breadcrumbs, TrimMyMatch(Item("world_static_voxel_mats"), message));
             }
 
             // Hidden
@@ -1261,14 +1261,14 @@ namespace ConfigurableOres
             // Add an ore
             if (IsMyMatch(Item("add"), message))
             {
-                message = RegexTrim(Item("add"), message);
+                message = TrimMyMatch(Item("add"), message);
                 return MenuPlanetAddOre(breadcrumbs, planetName, message);
             }
 
             // Remove an ore
             if (IsMyMatch(Item("del"), message))
             {
-                message = RegexTrim(Item("del"), message);
+                message = TrimMyMatch(Item("del"), message);
                 return MenuPlanetDelOre(breadcrumbs, planetName, message);
             }
 
@@ -1289,7 +1289,7 @@ namespace ConfigurableOres
             if (IsMyMatch(Item("depth"), message))
             {
                 var item = Item("depth");
-                message = RegexTrim(item, message);
+                message = TrimMyMatch(item, message);
                 return MenuPlanetAutoDepth(breadcrumbs, planetName, message);
             }
 
@@ -1297,7 +1297,7 @@ namespace ConfigurableOres
             if (IsMyMatch(Item("size"), message))
             {
                 var item = Item("size");
-                message = RegexTrim(item, message);
+                message = TrimMyMatch(item, message);
                 return MenuPlanetAutoSize(breadcrumbs, planetName, message);
             }
 
@@ -1306,7 +1306,7 @@ namespace ConfigurableOres
             {
                 if (!IsMyMatch(oreName, message)) continue;
 
-                message = RegexTrim(oreName, message);
+                message = TrimMyMatch(oreName, message);
                 return MenuPlanetOre(breadcrumbs, oreName, planetName, message);
             }
 
@@ -1701,7 +1701,7 @@ namespace ConfigurableOres
             {
                 if (!IsMyMatch(ore, message)) continue;
 
-                message = RegexTrim(ore, message);
+                message = TrimMyMatch(ore, message);
 
                 var rarity = planet.MeanRarity;
 
@@ -1912,14 +1912,14 @@ namespace ConfigurableOres
             // AutoDepth
             if (IsMyMatch(Item("depth"), message))
             {
-                message = RegexTrim(Item("depth"), message);
+                message = TrimMyMatch(Item("depth"), message);
                 return MenuPlanetOreAutoDepth(breadcrumbs, oreName, planetName, message);
             }
 
             // AutoSize
             if (IsMyMatch(Item("size"), message))
             {
-                message = RegexTrim(Item("size"), message);
+                message = TrimMyMatch(Item("size"), message);
                 return MenuPlanetOreAutoSize(breadcrumbs, oreName, planetName, message);
             }
 
@@ -2370,7 +2370,7 @@ namespace ConfigurableOres
 
         private static MyTuple<bool, bool> ChatParseBool(string command, string message)
         {
-            message = RegexTrim(command, message);
+            message = TrimMyMatch(command, message);
             if (message.Length < 1) return new MyTuple<bool, bool>(false, false);
 
             bool tmp;
@@ -2387,7 +2387,7 @@ namespace ConfigurableOres
 
         private static MyTuple<bool, float> ChatParsePositiveFloat(string command, string message)
         {
-            message = RegexTrim(command, message);
+            message = TrimMyMatch(command, message);
             if (message.Length < 1) return new MyTuple<bool, float>(false, 0);
 
             float tmp;
@@ -2406,7 +2406,7 @@ namespace ConfigurableOres
 
         private static MyTuple<bool, int> ChatParsePositiveInt(string command, string message)
         {
-            message = RegexTrim(command, message);
+            message = TrimMyMatch(command, message);
             if (message.Length < 1) return new MyTuple<bool, int>(false, 0);
 
             int tmp;
@@ -2425,7 +2425,7 @@ namespace ConfigurableOres
 
         private static MyTuple<bool, MyCubeSize> ChatParseCubeSize(string command, string message)
         {
-            message = RegexTrim(command, message);
+            message = TrimMyMatch(command, message);
             if (message.Length < 1) return new MyTuple<bool, MyCubeSize>(false, Large);
 
             MyCubeSize tmp;
