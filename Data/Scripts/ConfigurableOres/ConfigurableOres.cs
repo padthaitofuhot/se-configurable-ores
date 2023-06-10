@@ -489,7 +489,7 @@ namespace ConfigurableOres
 
                 //menuText.AppendLine(Format(CHAT_MENU_HINT_PLANETS, BreadCrumb(breadcrumbs, CHAT_MENU_ITEM_PLANETS)));
 
-                menuText.AppendLine(NiceList(Config.MyPlanetConfigurations.GetNames(), true));
+                menuText.AppendLine(NiceList(Config.MyPlanetConfigurations.GetNames()));
                 /*foreach (var planetName in Config.MyPlanetConfigurations.GetNames())
                 {
                     menuText.AppendLine(Format(CHAT_MENU_HINT_PLANET_KNOWN, breadcrumbs, planetName));
