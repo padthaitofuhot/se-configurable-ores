@@ -271,18 +271,20 @@ namespace ConfigurableOres
         
         public static bool IsMyMatch(string match, string text)
         {
-            var _regex = new Regex("(?i)^" + match);
-            return IsMyMatch(_regex, text);
-        }
+            LogVar("IsMyMatch", "match", match);
+            LogVar("IsMyMatch", "text", text);
+            
+            var matchRegex = new Regex(MenuRegexBuilder(match));
 
-        public static bool IsMyMatch(Regex match, string text)
-        {
-            return match.IsMatch(text);
+            return matchRegex.IsMatch(text);
         }
 
         public static string TrimMyMatch(string match, string text)
         {
-            return Regex.Replace(text, CHAT_REGEX_PREFIX + match, "", RegexOptions.IgnoreCase).Trim();
+            LogVar("RegexTrim", "match", match);
+            LogVar("RegexTrim", "text", text);
+
+            return Regex.Replace(text, MenuRegexBuilder(match), "", RegexOptions.IgnoreCase).Trim();
         }
 
         public static string ClarifyBoolString(string text)
