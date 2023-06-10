@@ -679,6 +679,7 @@ namespace ConfigurableOres
         public const string CHAT_HELP_ORE_HEADER = " {0} - {1} Settings (read the guide)";
         public const string CHAT_HELP_ORE_ADD_LIST = " Unassigned Ores";
         public const string CHAT_HELP_ORE_ADD_FAILED = "Add failed: duplicate ore or no free slots";
+        public const string CHAT_HELP_ORE_ADD_NOTFOUND = "Add failed: requested ore not found in list. Use \"/ore ores\" to get list of available ores.";
         public static string CHAT_HELP_ORE_ADD_SUCCESS = "{0} added to {1} with rarity {2}";
 
         public static string CHAT_HELP_ORE_ADD_FAILED_WITH_RARITY =
