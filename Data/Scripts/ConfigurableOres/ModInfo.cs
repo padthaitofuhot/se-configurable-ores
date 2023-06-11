@@ -56,8 +56,8 @@ namespace ConfigurableOres
         /// </summary>
         private const int RELEASE_NUMBER = 1;
         private const int MAJOR_VERSION = 0;
-        private const int MINOR_VERSION = 14;
-        private const int BUILD_NUMBER = 0524;
+        private const int MINOR_VERSION = 15;
+        private const int BUILD_NUMBER = 0;
 
         public static readonly Version Version = new Version(
             major: RELEASE_NUMBER,
