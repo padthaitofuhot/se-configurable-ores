@@ -435,7 +435,7 @@ namespace ConfigurableOres
             AddMenu("mod", "Mod", "Edit mod settings");
             AddItem("mod_summary", "Mod");
             AddHelp("mod_summary", "These settings modify core mod behaviors such as logging.");
-            AddMenu("mod_logging", "Logging <On/Off>", "Enable logging?");
+            AddMenu("mod_logging", "Logging", "<On/Off>: Enable or disable logging");
             AddHelp("mod_logging",
                 $"{Item("mod_logging")}: This setting enables or disables writing debug messages to the Space Engineers log file. This mod produces a lot of logging messages, so leave logging disabled unless you are troubleshooting.");
             AddMenu("mod_command_prefix", "CommandPrefix", "Set the command prefix (default \"/ore\")");
