@@ -42,13 +42,20 @@ namespace ConfigurableOres
         //  TODO [DEBUG] -- Set to false before publishing
         public const string CONFIG_FILE_NAME = "ConfigurableOres.xml";
 
-        // TODO: set to false on release.
+        // ------------------------------
+        // TODO: Set these to false on release.
+        // ------------------------------
+        // Whether or not to throw() up on errors
         public const bool ABEND_ON_FAULT = true;
+        // Whether or not logging is enabled immediately
         public static bool LOGGING_ENABLED = false;
+        // Whether or not default new config enables logging
         public static bool DEFAULT_LOGGING_ENABLED = false;
+        // ------------------------------
         
-        public const string DEFAULT_COMMAND_CHAR = "/";
-        public const string DEFAULT_COMMAND_PREFIX = "/ore";
+        public const string COMMAND_PREFIX = "/ore";
+        public const string MENU_REGEX_PREFIX = "(?i)^";
+        public const string MENU_REGEX_SUFFIX = "\\s*";
         public const float DEFAULT_OREMAP_DEPTH_START = 15f;
         public const float DEFAULT_OREMAP_DEPTH_SIZE = 1f;
         public const string DEFAULT_OREMAP_TARGETCOLOR = "#616c83";
@@ -255,25 +262,29 @@ namespace ConfigurableOres
 
         #region Menu Helpers
 
+        public static string MenuRegexBuilder(string match)
+        {
+            var regexString = $"{MENU_REGEX_PREFIX}{Regex.Escape(match)}{MENU_REGEX_SUFFIX}";
+            LogVar("MenuRegexBuilder", "regexString", regexString);
+            return regexString;
+        }
+        
         public static bool IsMyMatch(string match, string text)
         {
-            var _regex = new Regex("(?i)^" + match);
-            return IsMyMatch(_regex, text);
+            LogVar("IsMyMatch", "match", match);
+            LogVar("IsMyMatch", "text", text);
+            
+            var matchRegex = new Regex(MenuRegexBuilder(match));
+
+            return matchRegex.IsMatch(text);
         }
 
-        public static bool IsMyMatch(Regex match, string text)
+        public static string TrimMyMatch(string match, string text)
         {
-            return match.IsMatch(text);
-        }
+            LogVar("RegexTrim", "match", match);
+            LogVar("RegexTrim", "text", text);
 
-        /*public static string RegexTrim(Regex match, string text)
-        {
-            return RegexTrim(match.ToString(), text);
-        }*/
-
-        public static string RegexTrim(string match, string text)
-        {
-            return Regex.Replace(text, CHAT_REGEX_PREFIX + match, "", RegexOptions.IgnoreCase).Trim();
+            return Regex.Replace(text, MenuRegexBuilder(match), "", RegexOptions.IgnoreCase).Trim();
         }
 
         public static string ClarifyBoolString(string text)
