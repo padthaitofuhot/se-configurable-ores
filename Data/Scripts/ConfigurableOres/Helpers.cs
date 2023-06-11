@@ -48,9 +48,9 @@ namespace ConfigurableOres
         // Whether or not to throw() up on errors
         public const bool ABEND_ON_FAULT = true;
         // Whether or not logging is enabled immediately
-        public static bool LOGGING_ENABLED = true;
+        public static bool LOGGING_ENABLED = false;
         // Whether or not default new config enables logging
-        public static bool DEFAULT_LOGGING_ENABLED = true;
+        public static bool DEFAULT_LOGGING_ENABLED = false;
         // ------------------------------
         
         public const string COMMAND_PREFIX = "/ore";
