@@ -741,7 +741,7 @@ namespace ConfigurableOres
                 var parsed = ChatParseBool(item, message);
                 if (!parsed.Item1) return false;
 
-                Config.Logging = parsed.Item2;
+                LOGGING_ENABLED = Config.Logging = parsed.Item2;
                 WriteConfirmationToChat(item, parsed.Item2);
 
                 Save(Config);
