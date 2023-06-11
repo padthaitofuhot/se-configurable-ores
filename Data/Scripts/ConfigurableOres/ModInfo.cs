@@ -34,7 +34,7 @@ namespace ConfigurableOres
         /// Release: write / rewrite
         /// Major version: updates / new features -- compatability may break
         /// Minor version: minor changes / bugfixes -- backwards compatibility maintained
-        /// Build: build - no CI/CD, not used.
+        /// Build: build - append issue # to BUILD_NUMBER.
         /// </summary>
         private const int RELEASE_NUMBER = 1;
         private const int MAJOR_VERSION = 0;
