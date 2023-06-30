@@ -1050,8 +1050,19 @@ namespace ConfigurableOres
                 return new MyTuple<bool, string>(false, null);
             }
 
-            var matches = _myVoxelOres.First(vo => vo.Ore == ore && vo.IsStatic == false);
+            // Find the first match.
+            Log($"_myVoxelOres.FirstOrDefault(vo => vo.Ore == {ore} && vo.IsStatic == false)");
+            var matches = _myVoxelOres.FirstOrDefault(vo => vo.Ore == ore && vo.IsStatic == false);
 
+            // if the above search returns a null then idkwtf, but return false here.
+            // todo: this section is probably duct-tape on a bug.
+            if (matches == null)
+            {
+                Log("matches is null, returning false");
+                return new MyTuple<bool, string>(false, null);
+            } 
+            
+            // Return the match we found
             LogVar(ore, matches.VoxelMaterial);
             LogComplete($"GetVoxelMaterialByOre({ore})");
             return new MyTuple<bool, string>(true, matches.VoxelMaterial);
@@ -1069,7 +1080,11 @@ namespace ConfigurableOres
 
         public bool ContainsOre(string ore)
         {
-            return GetVoxelMaterialByOre(ore).Item1;
+			LogBegin($"ContainsOre({ore})");
+            var res = GetVoxelMaterialByOre(ore);
+            LogVar($"ContainsOre({ore}) res.Item1", res.Item1.ToString());
+            LogComplete($"ContainsOre({ore})");
+            return res.Item1;
         }
 
         public MyVoxelOre GetMyVoxelOreByVoxelMaterial(string voxelMaterial)
