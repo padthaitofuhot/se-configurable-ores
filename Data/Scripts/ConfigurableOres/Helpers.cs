@@ -173,7 +173,8 @@ namespace ConfigurableOres
             "AlienSnow",
             "AlienYellowGrass",
             "AlienYellowGrass bare",
-            "AlienSoil"
+            "AlienSoil",
+            "P142cWater"
         };
 
         // todo: make editable
