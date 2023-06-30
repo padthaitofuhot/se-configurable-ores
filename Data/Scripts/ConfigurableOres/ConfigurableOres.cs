@@ -246,18 +246,34 @@ namespace ConfigurableOres
             {
                 if (!voxelMaterial.CanBeHarvested) continue;
 
+				// oreName is the ore a voxel will produce when mined.
                 var oreName = voxelMaterial.MinedOre;
+				// voxelName is the subtypeID string of the ore, which should be a valid XML value. 
                 var voxelName = voxelMaterial.Id.SubtypeId.String;
+				// isStatic *here* checks to see if the ore is in our StaticVoxelMaterials list.
                 var isStatic = Config.StaticVoxelMaterials.Any(v => StringContains(v, voxelName));
 
+				// Now we have to handle things differently for non-static ores.  Sometimes they really should be
+				// static and this is where we figure that out.
                 switch (isStatic)
                 {
+					// First just add all static ores since we know all we need to about them.
                     case true:
                         VoxelOres.Add(voxelName, oreName, true);
                         break;
 
+					// Next do all the special cases for other ores.
                     case false:
                     {
+						// If the ore is in our ignored list, just ignore it.  It could be configurable, but 
+						// for some reason it normally won't be.  Usually weird shit such as "Organic". 
+                        if (Config.IgnoredOres.Any(v => StringContains(v, oreName)))
+                        {
+                            Log($"{voxelName} -> {oreName} is in IgnoredOres list");
+                            continue;
+                        }
+
+						// If the ore is in the NeverStaticVoxelMaterials then it will always be configurable.
                         if (Config.NeverStaticVoxelMaterials.Any(v => StringContains(v, voxelName)))
                         {
                             VoxelOres.Add(voxelName, oreName, false);
@@ -265,15 +281,19 @@ namespace ConfigurableOres
                             continue;
                         }
 
-                        if (Config.IgnoredOres.Any(v => StringContains(v, oreName)))
+                        // If its IsRare flag is true, then it shows up on ore detectors, which means it is not static.
+                        if (voxelMaterial.IsRare)
                         {
-                            Log($"{voxelName} -> {oreName} is in IgnoredOres list");
+                            Log($"{voxelName} -> {oreName} IsRare flag set true so this VoxelMaterial is not static");
+                            VoxelOres.Add(voxelName, oreName, false);
                             continue;
                         }
-
-                        // Assume a VoxelMaterial with a duplicate ore is static
+                        
+                        // First check if we already know about the ore and if so we assume it is static.
+                        // Discovered static ores are placed into the config file so we don't have to find them again.
                         if (VoxelOres.ContainsOre(oreName))
                         {
+                            Log($"VoxelOres.ContainsOre(oreName) == True");
                             // Add to config file so we don't have to process it again and squash duplicates
                             if (!Config.StaticVoxelMaterials.Any(v => StringContains(v, voxelName)))
                             {
@@ -285,7 +305,7 @@ namespace ConfigurableOres
                             continue;
                         }
 
-                        Log($"{voxelName} -> {oreName} added as minable ore");
+                        Log($"Adding {voxelName} -> {oreName} as mineable ore");
                         VoxelOres.Add(voxelName, oreName, false);
                         break;
                     }
