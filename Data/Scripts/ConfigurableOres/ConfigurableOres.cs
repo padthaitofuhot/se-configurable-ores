@@ -227,7 +227,20 @@ namespace ConfigurableOres
 
             LogBegin(LOG_LOAD_VOXELMATERIALS);
 
-            AllVoxelMaterialDefinitions = MyDefinitionManager.Static.GetVoxelMaterialDefinitions().ToList();
+            AllVoxelMaterialDefinitions = MyDefinitionManager.Static.GetVoxelMaterialDefinitions();
+            
+            if (LOGGING_ENABLED)
+            {
+                Log($"{CHAT_LINE_THICK}");
+                Log($"All Voxel Material Definitions to Mined Ores");
+                Log($"{CHAT_LINE_THICK}");
+                
+                foreach (var voxelMaterial in AllVoxelMaterialDefinitions)
+                {
+                    Log($"VoxelMaterial {voxelMaterial.Id.SubtypeId.String} -> {voxelMaterial.MinedOre}");
+                }
+                Log($"{CHAT_LINE_THICK}");
+            }
 
             foreach (var voxelMaterial in AllVoxelMaterialDefinitions)
             {
