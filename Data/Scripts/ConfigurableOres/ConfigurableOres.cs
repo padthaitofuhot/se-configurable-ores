@@ -387,7 +387,7 @@ namespace ConfigurableOres
                     case true:
                         Log(Format(LOG_SKIP_INITIALIZE_KNOWN_PLANET, planetSubtypeId));
 
-                        Config.MyPlanetConfigurations.Get(planetSubtypeId).ReInit();
+                        Config.MyPlanetConfigurations.Get(planetSubtypeId).ReInit(Config);
                         break;
 
                     // New MyPlanetConfiguration found, create new procedural ores MyPlanetConfiguration instance and add to settings.

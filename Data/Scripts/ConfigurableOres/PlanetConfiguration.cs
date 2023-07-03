@@ -65,9 +65,9 @@ namespace ConfigurableOres
     public class MyPlanetConfiguration
     {
         #region Not Chat Configurable
-
+        
         private static readonly ConfigurableOres Session = ConfigurableOres.Instance;
-        private static Configuration Config = Session.Config;
+        private Configuration Config;
 
         public int OreSlotCount;
         public int LargestOremappingCount;
@@ -156,9 +156,11 @@ namespace ConfigurableOres
             LogEnd(LOG_CREATE_PLANET_CONFIG);
         }
 
-        public void ReInit()
+        public void ReInit(Configuration config)
         {
-            Log("CleanUp");
+            Log($"Assigning Config = config");
+            Config = config;
+            
             CleanUpRemovedOres();
 
             Log("SetRelationship()");
