@@ -182,7 +182,8 @@ namespace ConfigurableOres
         {
             "tutorial",
             "test",
-            "example"
+            "example",
+            "SmallSPiderFake"
         };
 
         // todo: make editable
