@@ -327,21 +327,28 @@ namespace ConfigurableOres
 
             var planetsToRemove = new List<string>();
 
-            // Spew configured planets we know about going into this
-            if (Config.Logging)
-                Config.MyPlanetConfigurations.MemberPlanets
-                    .ForEach(p => LogVar(LOG_FOUND_PLANET_CONFIGURATION, p.Name));
-
             /*
+             * Send configured planets we know about going into this to log
+             */
+            if (Config.MyPlanetConfigurations != null && Config.Logging)
+            {
+                foreach (var planet in Config.MyPlanetConfigurations.MemberPlanets)
+                {
+                    LogVar(LOG_FOUND_PLANET_CONFIGURATION, planet.Name);
+                }
+            }
+            
             /*
-             * Clean settings to remove planets which are no longer present
-             * although tbh usually deleting a planet definition from the game after it's had an instance
+             * Add any missing planets to a remove queue.
+             * 
+             * Note: usually deleting a planet definition from the game after it's had an instance
              * created will corrupt the save.  Completely unrelated to this mod.  But hey, we can try to be
              * graceful about things.
              */
             if (Config.MyPlanetConfigurations != null && Config.MyPlanetConfigurations.Count() > 0)
             {
                 LogBegin(LOG_PURGE_MISSING_PLANET_CONFIGS);
+                
                 foreach (var planet in
                          Config.MyPlanetConfigurations.MemberPlanets.Where(planet =>
                              !AllPlanetGeneratorDefinitions
@@ -355,6 +362,9 @@ namespace ConfigurableOres
                 LogEnd(LOG_PURGE_MISSING_PLANET_CONFIGS);
             }
 
+            /*
+             * Initialize each planet by PlanetGeneratorDefinition
+             */
             foreach (var planetGeneratorDefinition in AllPlanetGeneratorDefinitions)
             {
                 var planetSubtypeId = planetGeneratorDefinition.Id.SubtypeId.ToString();
@@ -363,6 +373,7 @@ namespace ConfigurableOres
 
                 // filter out planets we won't use and shouldn't touch
                 var isFiltered = false;
+                
                 foreach (var ignored in Config.IgnoredPlanets)
                 {
                     isFiltered |= planetSubtypeId.IndexOf(ignored, StringComparison.CurrentCultureIgnoreCase) > -1;
@@ -371,7 +382,7 @@ namespace ConfigurableOres
                 if (isFiltered)
                 {
                     Log(Format(LOG_IGNORE_FILTERED_PLANET, planetSubtypeId));
-                    // Remove instances of filtered planets that are somehow in the configuration.
+                    // Put instances of filtered planets that are somehow in the configuration into the remove queue
                     if (Config.MyPlanetConfigurations.Contains(planetSubtypeId))
                     {
                         LogWarn(LOG_REMOVE_FILTERED_PLANET);
@@ -381,6 +392,11 @@ namespace ConfigurableOres
                     continue;
                 }
 
+                /*
+                 * Do the planet initialization.
+                 * Skip new planet init if we already have a config for it,
+                 * Otherwise do full new planet init.
+                 */
                 switch (Config.MyPlanetConfigurations.Contains(planetSubtypeId))
                 {
                     // Skip new planet initialization, planet is already in settings
@@ -390,7 +406,7 @@ namespace ConfigurableOres
                         Config.MyPlanetConfigurations.Get(planetSubtypeId).ReInit(Config);
                         break;
 
-                    // New MyPlanetConfiguration found, create new procedural ores MyPlanetConfiguration instance and add to settings.
+                    // New MyPlanetConfiguration found, create new MyPlanetConfiguration instance and add it to collection.
                     case false:
                         Log(Format(LOG_NEW_PLANET_FOUND, planetSubtypeId));
                         LogBegin(LOG_CREATE_PLANET_CONFIG);
