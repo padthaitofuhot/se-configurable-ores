@@ -99,7 +99,21 @@ namespace ConfigurableOres
 
         #region Persistence Methods
 
-        public static void Save(Configuration configuration)
+        private Configuration()
+        {
+            // Parameterless, empty constructor for deserialization
+        }
+
+        // Older calls to this do their own conditional logic, but should be refactored because the conditions they use can be condensed.
+        public static void Save(Configuration configuration, bool isHost = true)
+        {
+            if (isHost)
+            {
+                SaveOnHost(configuration);
+            }
+        }
+        
+        public static void SaveOnHost(Configuration configuration)
         {
             LogBegin(LOG_SAVE_CONFIGURATION);
 
@@ -127,7 +141,7 @@ namespace ConfigurableOres
                 LogFail(LOG_WRITE_CONFIGURATION);
                 Log(e.StackTrace);
 
-                // Leave a big turd in log and crash if config cannot be loaded.
+                // Leave a big error in log and crash if config cannot be loaded.
                 // todo: spam notification about bad config and disable mod functionality.
                 if (ABEND_ON_FAULT)
                 {
@@ -142,6 +156,7 @@ namespace ConfigurableOres
             return isHost ? LoadOnHost() : LoadOnClient();
         }
 
+        // Hosts should only load config from config file, never world var.
         private static Configuration LoadOnHost()
         {
             LOGGING_ENABLED = true;
@@ -458,17 +473,39 @@ namespace ConfigurableOres
             return clone;
         }
 
+        /// <summary>
+        /// To establish the world -> planet -> ore hierarchy of configuration influence,
+        /// we link the depth settings in a parent->child relationship.
+        /// Since the serializer does not know how to do that, we have to do it ourselves.
+        /// 
+        /// This method takes the parent MyDepthSettings object as the parameter.
+        /// It sets itself as a child on the parent using .AddChild(this).
+        ///
+        /// If we have no parent here, then we must be at the top level of the hierarchy.
+        /// </summary>
+        /// <param name="parent">parent MyDepthSettings object</param>
         public void SetRelationship(MyDepthSettings parent = null)
         {
-            if (parent == null) return;
+            LogBegin($"MyDepthSettings SetRelationship()");
+            if (parent == null)
+            {
+                Log("Top level, no parent.");
+                Log("Parent == null");
+                LogEnd($"MyDepthSettings SetRelationship()");
+                return;
+            }
 
             Parent = parent;
+            Log("child calling .AddChild");
             Parent.AddChild(this);
+            LogEnd($"MyDepthSettings SetRelationship()");
         }
 
         public void AddChild(MyDepthSettings child)
         {
+            LogBegin($"Adding child...");
             Children.Add(child);
+            LogEnd($"Child added");
         }
 
         public void Reset(MyDepthSettings parent = null)

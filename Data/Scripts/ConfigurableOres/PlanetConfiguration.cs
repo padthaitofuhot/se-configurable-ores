@@ -65,9 +65,9 @@ namespace ConfigurableOres
     public class MyPlanetConfiguration
     {
         #region Not Chat Configurable
-
+        
         private static readonly ConfigurableOres Session = ConfigurableOres.Instance;
-        private static Configuration Config = Session.Config;
+        private Configuration Config;
 
         public int OreSlotCount;
         public int LargestOremappingCount;
@@ -156,16 +156,29 @@ namespace ConfigurableOres
             LogEnd(LOG_CREATE_PLANET_CONFIG);
         }
 
-        public void ReInit()
+        public void ReInit(Configuration config)
         {
-            Log("CleanUp");
+            Log($"Assigning Config = config");
+            Config = config;
+            
             CleanUpRemovedOres();
 
-            Log("SetRelationship()");
+            Log("MyPlanetConfiguration Depth.SetRelationship()");
+            
+            LogVar("World Depth Max",Config.Depth.Max);
+            LogVar("My Depth.Max", Depth.Max);
+            
             Depth.SetRelationship(Config.Depth);
+            Log("MyPlanetConfiguration Size.SetRelationship()");
             Size.SetRelationship(Config.Size);
 
-            AssignedOres.ForEach(a => a.ReInit(this));
+            var i = 1;
+            foreach (var ore in AssignedOres)
+            {
+                Log($"Linking ore assignment {i}/{this.AssignedOres.Count} {ore.VoxelMinedOre} -> {ore.VoxelMaterialType} (Static? {ore.HasStaticVoxelMaterial}) ");
+                i++;
+                ore.ReInit(this);    
+            }
         }
 
         public void GenerateDefaultAssignments(IReadOnlyCollection<MyPlanetOreMapping> planetOreMappings)
@@ -545,6 +558,7 @@ namespace ConfigurableOres
         //todo: need a way to raffle off the freed 
         public void CleanUpRemovedOres()
         {
+            LogBegin("CleanUpRemovedOres()");
             var assignments = new List<MyPlanetOreAssignment>();
 
             assignments.AddRange(AssignedOres);
@@ -555,6 +569,7 @@ namespace ConfigurableOres
                 DelOreAssignment(ore);
                 AddOreAssignment("Stone", MeanRarity);
             }
+            LogEnd("CleanUpRemovedOres()");
         }
 
         #region Logging
@@ -681,7 +696,9 @@ namespace ConfigurableOres
         {
             Log("SetRelationship()");
             MyPlanet = myPlanet;
+            Log($"MyPlanet Depth.SetRelationship()");
             Depth.SetRelationship(MyPlanet.Depth);
+            Log($"MyPlanet Depth.SetRelationship()");
             Size.SetRelationship(MyPlanet.Size);
         }
 
